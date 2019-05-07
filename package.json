@@ -4,7 +4,7 @@
   "description": "Makes reading typed parameters from an ActivatedRoute sane",
   "author": "flamewise",
   "license": "any",
-  "repository": "",
+  "repository": "https://github.com/knoerrich/angular-router-sane",
   "files": [
     "readme.MD"
   ],
