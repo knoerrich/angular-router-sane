@@ -4,7 +4,25 @@ import { ActivatedRoute } from '@angular/router';
 import { Sane } from './angular-router-sane.service';
 
 describe('AngularRouterSaneService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let sane: Sane;
+  let result: any;
+  let result2: any;
+  let result3: any;
+  beforeEach(() => {
+    TestBed.configureTestingModule({})
+    sane = TestBed.get(Sane);
+    let route: any = {
+      snapshot: {
+        paramMap: {
+          get: (id: string) => { return id=='param' ? result : 'sane'; }
+        },
+        queryParamMap: {
+          get: (id: string) => { return id=='query' ? result2 : result3; }
+        }
+      }
+    };
+    sane.setActivatedRoute(route);
+  });
 
   it('should be created', () => {
     const sane: Sane = TestBed.get(Sane);
@@ -12,19 +30,6 @@ describe('AngularRouterSaneService', () => {
   });
 
   describe('hasBeenSet', () => {
-    let sane: Sane;
-    let result: any;
-    beforeEach(() => {
-      sane = TestBed.get(Sane);
-      let route: any = {
-        snapshot: {
-          paramMap: {
-            get: (id: string) => { return id=='param' ? result : 'insane'; }
-          }
-        }
-      };
-      sane.setActivatedRoute(route);
-    });
 
     it('should return false for undefined', () => {
       result = undefined;
@@ -76,19 +81,6 @@ describe('AngularRouterSaneService', () => {
   });
 
   describe('getNumber', () => {
-    let sane: Sane;
-    let result: any;
-    beforeEach(() => {
-      sane = TestBed.get(Sane);
-      let route: any = {
-        snapshot: {
-          paramMap: {
-            get: (id: string) => { return id=='param' ? result : 'insane'; }
-          }
-        }
-      };
-      sane.setActivatedRoute(route);
-    });
 
     it('should return 0 for null', () => {
       result = null;
@@ -150,10 +142,10 @@ describe('AngularRouterSaneService', () => {
       expect(number).toBe(0);
     });
 
-    it('should return 0 for NaN (unfortunately, it is too hard to distinguish between isNaN(\'x\') and isNaN(NaN))', () => {
+    it('should return NaN for NaN', () => {
       result = NaN;
       const number: number = sane.getNumber('param');
-      expect(number).toBe(0);
+      expect(number).toBeNaN();
     });
 
     it('should return Infinity for +Infinity', () => {
@@ -243,19 +235,6 @@ describe('AngularRouterSaneService', () => {
   });
 
   describe('getBoolean', () => {
-    let sane: Sane;
-    let result: any;
-    beforeEach(() => {
-      sane = TestBed.get(Sane);
-      let route: any = {
-        snapshot: {
-          paramMap: {
-            get: (id: string) => { return id=='param' ? result : 'insane'; }
-          }
-        }
-      };
-      sane.setActivatedRoute(route);
-    });
 
     it('should return false for null', () => {
       result = null;
@@ -367,19 +346,6 @@ describe('AngularRouterSaneService', () => {
   });
 
   describe('getString', () => {
-    let sane: Sane;
-    let result: any;
-    beforeEach(() => {
-      sane = TestBed.get(Sane);
-      let route: any = {
-        snapshot: {
-          paramMap: {
-            get: (id: string) => { return id=='param' ? result : 'insane'; }
-          }
-        }
-      };
-      sane.setActivatedRoute(route);
-    });
 
     it('should return \'\' for null', () => {
       result = null;
@@ -429,10 +395,10 @@ describe('AngularRouterSaneService', () => {
       expect(string).toBe('X');
     });
 
-    it('should return \'insane\' for other param', () => {
+    it('should return \'sane\' for other param', () => {
       result = false;
       const string: string = sane.getString('other');
-      expect(string).toBe('insane');
+      expect(string).toBe('sane');
     });
 
     it('should return \'\"Hello, \\Wörld\\\'\n\' for \'\"Hello, \\Wörld\\\'\n\'', () => {
@@ -443,19 +409,6 @@ describe('AngularRouterSaneService', () => {
   });
 
   describe('getJson', () => {
-    let sane: Sane;
-    let result: any;
-    beforeEach(() => {
-      sane = TestBed.get(Sane);
-      let route: any = {
-        snapshot: {
-          paramMap: {
-            get: (id: string) => { return id=='param' ? result : 'insane'; }
-          }
-        }
-      };
-      sane.setActivatedRoute(route);
-    });
 
     it('should return null for null', () => {
       result = null;
