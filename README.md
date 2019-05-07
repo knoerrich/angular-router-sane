@@ -11,12 +11,12 @@ Run `npm install angular-router-sane`.
  - In a component, `import { Sane } from 'angular-router-sane'`.
  - During construction, tell `Sane` which route to use:
 ```
-   constructor(
+  constructor(
     route: ActivatedRoute,
-      private sane: Sane
-    ) {
-      this.sane.route(route);
-    } 
+    private sane: Sane
+  ) {
+    this.sane.route(route);
+  } 
 ```
  - Now you can use `const id: number = this.sane.number('parameter');` with confidence that `id` will always be a number.
  
