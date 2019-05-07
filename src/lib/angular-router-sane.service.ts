@@ -247,37 +247,46 @@ The GNU General Public License does not permit incorporating your program into p
 
   public json = (name: string): any => this.getJson(name);
 
-  setActivatedRoute(route: ActivatedRoute): void {
+  public setActivatedRoute(route: ActivatedRoute): void {
     this._route = route;
   }
 
-  hasBeenSet(name: string): boolean {
-    const value:string = this._route.snapshot.paramMap.get(name);
+  public hasBeenSet(name: string): boolean {
+    const value:string = this.get(name);
     return value !== undefined && value !== '';
   }
 
-  getNumber(name: string): number {
-    const value: number = +this._route.snapshot.paramMap.get(name);
-    return isNaN(+value) ? 0 : +value;
+  public getNumber(name: string): number {
+    const value: any = this.get(name);
+    return value == value && isNaN(+value) ? 0 : +value;
   }
   
-  getBoolean(name: string): boolean {
-    const value: string = this._route.snapshot.paramMap.get(name);
+  public getBoolean(name: string): boolean {
+    const value: string = this.get(name);
     return value && value != 'false' && value != '0' ? true : false;
   }
 
-  getString(name: string): string {
-    const value: string = this._route.snapshot.paramMap.get(name);
+  public getString(name: string): string {
+    const value: string = this.get(name);
     return value != undefined ? value.toString() : '';
   }
 
-  getJson(name: string): any {
-    const value: string = this._route.snapshot.paramMap.get(name);
+  public getJson(name: string): any {
+    const value: string = this.get(name);
     try {
       return JSON.parse(value);
     }
     catch {
       return undefined;
     }
+  }
+  
+  public get(name: string): any {
+    const param: string = this._route.snapshot.paramMap.get(name);
+    if (param !== undefined) {
+      return param;
+    }
+    const queryParam: string = this._route.snapshot.queryParamMap.get(name);
+    return queryParam;
   }
 }
