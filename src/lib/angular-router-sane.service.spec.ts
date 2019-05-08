@@ -51,6 +51,7 @@ describe('AngularRouterSaneService', () => {
 
     it('should return true for null', () => {
       result = null;
+      result3 = null;
       const is: boolean = sane.hasBeenSet('param');
       expect(is).toBe(true);
     });
@@ -412,12 +413,14 @@ describe('AngularRouterSaneService', () => {
 
     it('should return null for null', () => {
       result = null;
+      result3 = null;
       const any: any = sane.getJson('param');
       expect(any).toBe(null);
     });
 
     it('should return undefined for undefined', () => {
       result = undefined;
+      result3 = undefined;
       const any: any = sane.getJson('param');
       expect(any).toBe(undefined);
     });

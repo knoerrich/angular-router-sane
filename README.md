@@ -1,6 +1,6 @@
 # angular-router-sane
 
-Makes reading typed parameters from an activated route sane. This means that the returned value will always be guaranteed to be of the expected type. Numbers will always be numbers and strings will always be strings. Disclaimer: `NaN`is not a legit number for the sake of sanity.
+Makes reading typed parameters from an activated route sane, first from paramMap and if not existing there from queryParamMap. This means that the returned value will always be guaranteed to be of the expected type. Numbers will always be numbers and strings will always be strings.
 
 ## Installation
 
@@ -36,6 +36,12 @@ Tell `Sane` which route to parse for parameters. Unfortunately, each component c
 
 A parameter with the given name is present and has been set to any other value than ''
 
+### get()
+
+`get(name:string): any`
+
+A parameter with the given name is returned without converting into a specific type
+
 ### number()
 
 `number(name:string): number`
@@ -62,7 +68,7 @@ Any parameter with the given name is sanitized into a string.
 `json(name:string): any`
 `getJson(name:string): any`
 
-Any parameter with the given name is sanitized into a string.
+Any parameter with the given name is deserialized into a javascript object.
 
 ### Long form functions
 

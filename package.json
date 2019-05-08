@@ -1,6 +1,6 @@
 {
   "name": "angular-router-sane",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Makes reading typed parameters from an ActivatedRoute sane",
   "author": "flamewise",
   "license": "any",

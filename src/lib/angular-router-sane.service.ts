@@ -283,7 +283,7 @@ The GNU General Public License does not permit incorporating your program into p
   
   public get(name: string): any {
     const param: string = this._route.snapshot.paramMap.get(name);
-    if (param !== undefined) {
+    if (param != undefined) {
       return param;
     }
     const queryParam: string = this._route.snapshot.queryParamMap.get(name);
